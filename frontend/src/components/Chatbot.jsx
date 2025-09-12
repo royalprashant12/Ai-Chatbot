@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import ChatHeader from "./ChatHeader";
 import ChatMessages from "./ChatMessages";
 import ChatInput from "./ChatInput";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
+
 const uniqId = uuidv4();
 
 function Chatbot() {
@@ -22,7 +23,7 @@ function Chatbot() {
       const res = await fetch("http://localhost:5000/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: question , threadId: uniqId }),
+        body: JSON.stringify({ message: question, threadId: uniqId }),
       });
 
       const data = await res.json();
@@ -55,8 +56,19 @@ function Chatbot() {
             : "bg-gradient-to-br from-purple-50 via-white to-indigo-50 text-black border-gray-200"
         }`}
       >
-        <ChatHeader darkMode={darkMode} toggleDarkMode={() => setDarkMode(!darkMode)} />
-        <ChatMessages messages={messages} loading={loading} darkMode={darkMode} />
+        <ChatHeader
+          darkMode={darkMode}
+          toggleDarkMode={() => setDarkMode(!darkMode)}
+        />
+
+        {/* ✅ Pass setQuestion into ChatMessages */}
+        <ChatMessages
+          messages={messages}
+          loading={loading}
+          darkMode={darkMode}
+          setQuestion={setQuestion}
+        />
+
         <ChatInput
           question={question}
           setQuestion={setQuestion}
