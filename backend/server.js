@@ -14,26 +14,35 @@ app.get("/", (req, res) => {
 
 app.post("/api/chat", async (req, res) => {
   try {
-    const { message, threadId } = req.body;
+    const { message, threadId, model, temperature, maxTokens } = req.body;
 
-    // validate
-    if (!message || !threadId) {
+    if (!message || !threadId || !model) {
       return res
         .status(400)
-        .json({ error: "Message and threadId are required!" });
+        .json({ error: "Message, threadId, and model are required!" });
     }
 
-    console.log("Message:", message, "ThreadId:", threadId);
+    console.log("Incoming:", {
+      message,
+      threadId,
+      model,
+      temperature,
+      maxTokens,
+    });
 
-    const result = await generate(message, threadId);
-
+    const result = await generate(
+      message,
+      threadId,
+      model,
+      temperature,
+      maxTokens
+    );
     return res.json({ message: result });
   } catch (err) {
     console.error("Server Error:", err);
     return res.status(500).json({ error: "Internal Server Error" });
   }
 });
-
 app.listen(port, () => {
-  console.log(`Server is running on port: ${port}`);
+  console.log(`Server running at http://localhost:${port}`);
 });

@@ -8,7 +8,13 @@ const tvly = tavily({ apiKey: process.env.TAVILY_API_KEY });
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 const cache = new NodeCache({ stdTTL: 60 * 60 * 24 }); // 24 hours
 
-export async function generate(userMessage, threadId) {
+export async function generate(
+  userMessage,
+  threadId,
+  model,
+  temperature,
+  maxTokens
+) {
   const baseMessages = [
     {
       role: "system",
@@ -57,8 +63,9 @@ export async function generate(userMessage, threadId) {
       return "⚠️ Sorry, I have reached certain limit won't get answer . Please try again later.";
     }
     const completions = await groq.chat.completions.create({
-      model: "llama-3.3-70b-versatile",
-      temperature: 0,
+      model: model || "llama-3.3-70b-versatile",
+      temperature: temperature ?? 0.7, // default safe value
+      max_tokens: maxTokens ?? 500,
       messages: messages,
       tools: [
         {
