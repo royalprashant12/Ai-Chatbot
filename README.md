@@ -38,6 +38,8 @@ https://www.figma.com/make/8CItpzTadxeyAT5Xlm4v7a/AI-Model-Interface?node-id=0-1
 
 ### Design System Mapping
 
+https://prashant-ai.my.canva.site/
+
 Our Tailwind implementation maps to a cohesive design system:
 
 **Color Palette:**
