@@ -1,6 +1,7 @@
 # AI Chatbot Interface
 
 A powerful AI-powered chatbot that combines the intelligence of Groq's Llama 3.3 70B model with a modern, responsive React interface. Features advanced parameter controls, template management, conversation caching, and seamless dark/light theme switching.
+![AI Chatbot Screenshot](https://github.com/royalprashant12/Ai-Chatbot/blob/main/frontend/public/image.png?raw=true)
 
 ## 🔬 Research
 
